@@ -1,0 +1,22 @@
+name: Tag PR
+
+on:
+  push:
+    branches: [ "main" ]
+  
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+    
+jobs:
+  tagpr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.TAG_PR_TOKEN }}
+    - uses: Songmu/tagpr@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TAG_PR_TOKEN }}
